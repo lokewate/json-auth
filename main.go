@@ -11,6 +11,10 @@ type UserInfo struct {
 	Password string
 }
 
+type LoginResponse struct {
+	Status string
+}
+
 func authenticated(u UserInfo) bool {
 	return true
 }
@@ -23,11 +27,13 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+	var lr LoginResponse
 	if authenticated(u) {
-		w.Write([]byte("{Status: success}"))
+		lr.Status = "success"
 	} else {
-		w.Write([]byte("{Status: failure}"))
+		lr.Status = "failure"
 	}
+	json.NewEncoder(w).Encode(lr)
 }
 
 func main() {
