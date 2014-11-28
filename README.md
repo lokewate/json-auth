@@ -1,4 +1,4 @@
 json-auth
 =========
 
-Httpserver that takes json request to authenticate
+Httpserver that takes json request to authenticate.
